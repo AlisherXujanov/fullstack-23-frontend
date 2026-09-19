@@ -1,0 +1,270 @@
+@use "../../assets/styles/settings" as *;
+
+.site-footer {
+    position: relative;
+    overflow: hidden;
+    margin-top: auto;
+    background: $dark;
+    color: $light;
+}
+
+.site-footer__inner {
+    position: relative;
+    z-index: 1;
+    @include content-wrap;
+    padding-top: $space-48;
+    padding-bottom: $space-32;
+}
+
+.site-footer__cta {
+    @include flex(column, flex-start, stretch, $space-12);
+    padding: $space-32;
+    margin-bottom: $space-48;
+    border: 1px solid rgba(255, 250, 250, 0.12);
+    border-radius: $radius-control;
+    background: rgba(255, 250, 250, 0.04);
+}
+
+.site-footer__cta-row {
+    @include flex(row, flex-start, center, $space-16);
+    flex-wrap: wrap;
+}
+
+.site-footer__cta-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+}
+
+.site-footer__cta-text {
+    max-width: 40rem;
+    color: $secondary;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.site-footer__cta-button {
+    @include flex(row, center, center, $space-8);
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 0 $space-24;
+    border-radius: $radius-pill;
+    background: $light;
+    color: $dark;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity $duration-hover $ease-out;
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            opacity: 0.88;
+        }
+    }
+}
+
+.site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 0.9fr 1.1fr 1.1fr;
+    gap: $space-32 $space-24;
+    padding-bottom: $space-48;
+}
+
+.site-footer__brand {
+    @include flex(column, flex-start, flex-start, $space-16);
+}
+
+.site-footer__logo {
+    @include flex(row, flex-start, center, $space-8);
+    min-height: 44px;
+    color: $light;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+}
+
+.site-footer__mark {
+    width: 20px;
+    height: 20px;
+    color: $success;
+}
+
+.site-footer__purpose {
+    max-width: 28ch;
+    color: $secondary;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.site-footer__column {
+    @include flex(column, flex-start, flex-start, $space-12);
+
+    ul {
+        @include flex(column, flex-start, flex-start, $space-8);
+        list-style: none;
+    }
+
+    a {
+        @include flex(row, flex-start, center, $space-8);
+        min-height: 36px;
+        color: $light;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        opacity: 0.82;
+        transition: opacity $duration-hover $ease-out;
+
+        &[aria-current="page"] {
+            opacity: 1;
+            font-weight: 600;
+            box-shadow: inset 0 -2px 0 $success;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.site-footer__heading {
+    color: $secondary;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.site-footer__status,
+.site-footer__meta {
+    @include flex(row, flex-start, center, $space-8);
+    min-height: 36px;
+    color: $light;
+    font-size: 14px;
+}
+
+.site-footer__meta {
+    color: $secondary;
+}
+
+.site-footer__pulse {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: $radius-pill;
+    background: $success;
+    box-shadow: 0 0 0 4px rgba(7, 196, 7, 0.16);
+}
+
+.site-footer__legal {
+    @include flex(row, space-between, center, $space-16);
+    padding-top: $space-24;
+    border-top: 1px solid rgba(255, 250, 250, 0.12);
+    color: $secondary;
+    font-size: 13px;
+
+    nav {
+        @include flex(row, flex-end, center, $space-16);
+        flex-wrap: wrap;
+    }
+
+    a {
+        color: $secondary;
+        text-decoration: none;
+        transition: color $duration-hover $ease-out;
+
+        &[aria-current="page"] {
+            color: $light;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                color: $light;
+            }
+        }
+    }
+}
+
+.site-footer__wordmark {
+    position: relative;
+    z-index: 0;
+    margin: $space-8 $content-gutter 0;
+    color: $light;
+    font-size: clamp(4.5rem, 16vw, 9.5rem);
+    font-weight: 700;
+    letter-spacing: -0.07em;
+    line-height: 0.85;
+    opacity: 0.08;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (max-width: 1024px) {
+    .site-footer__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer__brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 767px) {
+    .site-footer__cta {
+        padding: $space-24;
+        margin-bottom: $space-32;
+    }
+
+    .site-footer__cta-row {
+        @include flex(column, flex-start, stretch, $space-16);
+        align-items: stretch;
+    }
+
+    .site-footer__cta-button {
+        width: 100%;
+    }
+
+    .site-footer__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: $space-32 $space-16;
+        padding-bottom: $space-32;
+    }
+
+    .site-footer__brand {
+        grid-column: 1 / -1;
+    }
+
+    .site-footer__purpose {
+        max-width: none;
+    }
+
+    .site-footer__column a,
+    .site-footer__status,
+    .site-footer__meta {
+        min-height: 44px;
+    }
+
+    .site-footer__legal {
+        @include flex(column, flex-start, flex-start, $space-12);
+        align-items: flex-start;
+    }
+
+    .site-footer__legal nav {
+        justify-content: flex-start;
+    }
+
+    .site-footer__wordmark {
+        margin-top: $space-16;
+        font-size: clamp(4rem, 28vw, 7rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-footer__column a,
+    .site-footer__cta-button,
+    .site-footer__legal a {
+        transition-duration: 80ms;
+    }
+}

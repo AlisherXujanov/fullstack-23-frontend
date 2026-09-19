@@ -1,0 +1,274 @@
+@use "../../assets/styles/settings" as *;
+
+.skip-link {
+    position: absolute;
+    left: $space-16;
+    top: $space-16;
+    z-index: 60;
+    padding: $space-8 $space-16;
+    border-radius: $radius-control;
+    background: $dark;
+    color: $light;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transform: translateY(-160%);
+    transition: transform $duration-hover $ease-out;
+
+    &:focus,
+    &:focus-visible {
+        transform: translateY(0);
+    }
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: $header-surface;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(108, 117, 125, 0.16);
+
+    &.is-scrolled {
+        border-bottom-color: rgba(108, 117, 125, 0.28);
+        box-shadow: $shadow-sticky;
+    }
+}
+
+.site-nav {
+    position: relative;
+    z-index: 50;
+}
+
+.site-nav__bar {
+    @include content-wrap;
+    @include flex(row, space-between, center, $space-16);
+    min-height: $header-height;
+}
+
+.site-nav__brand {
+    @include flex(row, flex-start, center, $space-8);
+    min-height: 44px;
+    color: $dark;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+}
+
+.site-nav__mark {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: $success;
+}
+
+.site-nav__links {
+    @include flex(row, center, center, $space-8);
+    list-style: none;
+
+    @media (max-width: 767px) {
+        display: none;
+    }
+}
+
+.site-nav__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 $space-12;
+    border-radius: $radius-control;
+    color: $secondary;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition:
+        color $duration-hover $ease-out,
+        background-color $duration-hover $ease-out;
+
+    &[aria-current="page"] {
+        color: $dark;
+        font-weight: 600;
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: $space-12;
+            bottom: 8px;
+            left: $space-12;
+            height: 2px;
+            border-radius: $radius-pill;
+            background: $success;
+        }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            color: $dark;
+            background-color: rgba(108, 117, 125, 0.1);
+        }
+    }
+}
+
+.site-nav__cta {
+    @include flex(row, center, center, 0);
+    min-height: 40px;
+    padding: 0 $space-16;
+    border-radius: $radius-pill;
+    background: $dark;
+    color: $light;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity $duration-hover $ease-out;
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            opacity: 0.86;
+        }
+    }
+
+    &--desktop {
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    &--panel {
+        width: 100%;
+        min-height: 44px;
+        margin-top: $space-8;
+    }
+}
+
+.site-nav__menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: $radius-control;
+    background: transparent;
+    color: $dark;
+    cursor: pointer;
+
+    @media (max-width: 767px) {
+        display: inline-flex;
+    }
+}
+
+.site-nav__overlay {
+    position: fixed;
+    inset: $header-height 0 0;
+    z-index: 40;
+    border: 0;
+    padding: 0;
+    background: rgba(51, 51, 51, 0.28);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    cursor: pointer;
+    transition:
+        opacity $duration-drawer $ease-out,
+        visibility $duration-drawer $ease-out;
+
+    &.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+}
+
+.site-nav__panel {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .site-nav__panel {
+        position: fixed;
+        top: $header-height;
+        right: 0;
+        left: 0;
+        z-index: 55;
+        display: flex;
+        flex-direction: column;
+        gap: $space-8;
+        padding: $space-16 $content-gutter $space-24;
+        background-color: $light;
+        border-bottom: 1px solid rgba(108, 117, 125, 0.16);
+        box-shadow: $shadow-sticky;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transform-origin: top center;
+        transition:
+            opacity $duration-drawer $ease-out,
+            transform $duration-drawer $ease-out,
+            visibility $duration-drawer $ease-out;
+
+        &.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: none;
+        }
+    }
+}
+
+.site-nav__panel-links {
+    @include flex(column, flex-start, stretch, $space-8);
+    list-style: none;
+}
+
+.site-nav__panel-link {
+    @include flex(row, flex-start, center, 0);
+    min-height: 44px;
+    padding: 0 $space-12;
+    border-radius: $radius-control;
+    color: $secondary;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition:
+        color $duration-hover $ease-out,
+        background-color $duration-hover $ease-out;
+
+    &[aria-current="page"] {
+        color: $dark;
+        font-weight: 600;
+        box-shadow: inset 3px 0 0 $success;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            color: $dark;
+            background-color: rgba(108, 117, 125, 0.1);
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-nav__link,
+    .site-nav__cta,
+    .site-nav__overlay,
+    .site-nav__panel,
+    .site-nav__panel-link {
+        transition-duration: 80ms;
+    }
+
+    .site-nav__panel {
+        transform: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .site-nav__overlay,
+    .site-nav__panel {
+        display: none;
+    }
+}

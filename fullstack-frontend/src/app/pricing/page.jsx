@@ -1,10 +1,32 @@
+"use client"
 import Title from "@/components/Title"
+import { useState } from "react"
+
+// Hook  =>  useState
 
 function Pricing() {
+    const [count, setCount] = useState(0)
+
+    // ...
+    // JS code
+    // ...
+    function handleClick(event) {
+        let button = event.target
+        if (button.name == 'inc') {
+            setCount(count + 1)
+        } else if (button.name == 'dec') {
+            setCount(count - 1)
+        } else {
+            throw new Error("Invalid button name")
+        }
+    }
+
     return (
         <div className="pricing-page page-container">
             <Title title='Pricing Page'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ratione facere, sapiente iure ipsam labore exercitationem quibusdam hic necessitatibus iste, neque quam, ipsa pariatur cum nesciunt quod nostrum veniam aperiam?
+                <button onClick={handleClick} name="dec">Decrement</button>
+                <b>{count}</b>
+                <button onClick={handleClick} name="inc">Increment</button>
             </Title>
         </div>
     )
