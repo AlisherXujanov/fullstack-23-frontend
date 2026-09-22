@@ -1,0 +1,16 @@
+@use "../../assets/styles/settings" as *;
+
+.posts {
+    padding: 20px 0;
+    width: 100%;
+    overflow: auto;
+    @include flex(flex-start, flex-start, row, 20px);
+    flex-wrap: wrap;
+
+
+    .post-item {
+        background-color: lightgray;
+        padding: 10px;
+        border-radius: 10px;
+    }
+}
