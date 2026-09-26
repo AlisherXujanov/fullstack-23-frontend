@@ -1,38 +1,20 @@
-import { Montserrat, Oxygen } from "next/font/google"
-import "./globals.scss"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
+"use client"
 
-const oxygen = Oxygen({
-    subsets: ["latin"],
-    weight: ["300", "400", "700"],
-    display: "swap",
-    variable: "--font-sans",
-})
-
-const montserrat = Montserrat({
-    subsets: ["latin"],
-    weight: ["400", "700"],
-    display: "swap",
-    variable: "--font-nav",
-})
-
-export const metadata = {
-    title: {
-        default: "Vetta",
-        template: "%s | Vetta",
-    },
-    description: "Vetta pet care",
-}
+import "./globals.scss";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { CONTEXT, initialState } from "@/store";
 
 export default function RootLayout({ children }) {
-    return (
-        <html lang="en" className={`${oxygen.variable} ${montserrat.variable}`}>
-            <body className={oxygen.className}>
-                <Header />
-                <main id="main">{children}</main>
-                <Footer />
-            </body>
-        </html>
-    )
+  return (
+    <html lang="en">
+      <body>
+        <Navigation />
+        <CONTEXT.Provider value={initialState}>
+          <main id="main">{children}</main>
+        </CONTEXT.Provider>
+        <Footer />
+      </body>
+    </html>
+  );
 }
